@@ -5,7 +5,7 @@ import pegleglady from '../assets/pirate_pictures/pegleg.png';
 import mermaid from '../assets/pirate_pictures/hotmermaid.png';
 import piratewithfish from '../assets/pirate_pictures/piratewithfish.png';
 import nami from '../assets/pirate_pictures/nami.avif';
-import luffy from '../assets/pirate_pictures/luffy.webp';
+import luffy from '../assets/pirate_pictures/luffy.png';
 
 
 export const pirateProfiles = [
