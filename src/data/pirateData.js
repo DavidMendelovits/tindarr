@@ -1,8 +1,10 @@
 import ladyPirate from '../assets/pirate_pictures/ladypirate.webp';
-import fishGuy from '../assets/pirate_pictures/Collier-Tinder-Guy-Holding-a-Fish.webp';
+import manwithfish from '../assets/pirate_pictures/manwithfish.webp';
 import couplePirate from '../assets/pirate_pictures/looking43rd.webp';
-import pegleglady from '../assets/pirate_pictures/pegleg.webp';
-import mermaid from '../assets/pirate_pictures/mermaid.webp';
+import pegleglady from '../assets/pirate_pictures/pegleg.png';
+import mermaid from '../assets/pirate_pictures/hotmermaid.png';
+import piratewithfish from '../assets/pirate_pictures/piratewithfish.png';
+
 
 export const pirateProfiles = [
   {
@@ -31,8 +33,8 @@ export const pirateProfiles = [
     ship: "The Sassy Serpent",
     location: "Caribbean Waters",
     bio: "Looking for a first mate who can handle both treasure maps and deep conversations. Must love parrots!",
-    interests: ["Treasure hunting", "Sword fighting", "Star navigation"],
-    image: ladyPirate,
+    interests: ["Pegging", "Sword fighting", "Astrology"],
+    image: pegleglady,
     matchProbability: 0.9,
     messages: [
       "Ahoy! Board my ship will ye?",
@@ -61,8 +63,45 @@ export const pirateProfiles = [
       "I know all the wettest spots around here",
       "My bottom half isn't the only thing that's fishy 😉"
     ]
+  },
+  {
+    id: 4,
+    name: "Jake P",
+    age: "29",
+    ship: "The Sassy Serpent",
+    location: "Tortuga",
+    bio: "Looking for someone who will let me lick their face",
+    interests: ["Pegging", "Sword fighting", "Astrology"],
+    image: manwithfish,
+    matchProbability: 0.9,
+    messages: [
+      "Ahoy! Board my ship will ye?",
+      "I need to tell you a secret. I've got scurvy",
+      "And herpes.",
+      "Most of my crew does too, we're very close 😉",
+      "Want to compare symptoms?",
+      "I know a witch doctor who can help us both..."
+    ]
+  },
+  {
+    id: 5,
+    name: "Luke Longdick",
+    age: "29",
+    ship: "The Sassy Serpent",
+    location: "Tortuga",
+    bio: "Looking for someone who doesn't smell like a fish",
+    interests: ["Pegging", "Sword fighting", "Astrology"],
+    image: piratewithfish,
+    matchProbability: 0.9,
+    messages: [
+      "Ahoy! Board my ship will ye?",
+      "I need to tell you a secret. I've got scurvy",
+      "And herpes.",
+      "Most of my crew does too, we're very close 😉",
+      "Want to compare symptoms?",
+      "I know a witch doctor who can help us both..."
+    ]
   }
-  // ... add other profiles with their custom messages
 ];
 
 export const defaultMessages = [
