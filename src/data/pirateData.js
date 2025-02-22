@@ -6,6 +6,7 @@ import mermaid from '../assets/pirate_pictures/hotmermaid.png';
 import piratewithfish from '../assets/pirate_pictures/piratewithfish.png';
 import nami from '../assets/pirate_pictures/nami.avif';
 import luffy from '../assets/pirate_pictures/luffy.png';
+import bigmom from '../assets/pirate_pictures/bigmom.webp';
 
 
 export const pirateProfiles = [
@@ -127,6 +128,19 @@ export const pirateProfiles = [
     bio: "I’m gonna be king of the pirate and find the One Piece (of that ass)",
     interests: ["meat"],
     image: luffy,
+    matchProbability: 0.9,
+    messages: [
+    ]
+  },
+  {
+    id: 8,
+    name: "Big Mom",
+    age: "29",
+    ship: "Big Cake Island",
+    location: "Big Cake Island",
+    bio: "Massive bbw who loves cake. Btw I have 100 children",
+    interests: ["Cake"],
+    image: bigmom,
     matchProbability: 0.9,
     messages: [
     ]
