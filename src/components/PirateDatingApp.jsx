@@ -8,10 +8,13 @@ import couplePirate from '../assets/pirate_pictures/looking43rd.webp';
 import pegleglady from '../assets/pirate_pictures/pegleg.webp';
 import mermaid from '../assets/pirate_pictures/mermaid.webp';
 import MessagesScreen from './MessagesScreen';
+import MatchModal from './MatchModal';
 
 const PirateDatingApp = () => {
   const [currentScreen, setCurrentScreen] = useState('discover');
   const [lastDirection, setLastDirection] = useState();
+  const [matches, setMatches] = useState([]);
+  const [currentMatch, setCurrentMatch] = useState(null);
 
   // Add swipe configuration
   const swipeConfig = {
@@ -39,7 +42,8 @@ const PirateDatingApp = () => {
       location: "Santa Monica, CA",
       bio: "We are a couple of pirates looking for a new crew member to join us on our adventures.",
       interests: ["Cuckoldry", "Anal Beads","Treasure hunting", "Crossing Swords"],
-      image: couplePirate
+      image: couplePirate,
+      matchProbability: 0.8 // 80% chance to match
     },
     {
       name: "Captain Sally 'Silver Tongue' Smith",
@@ -48,7 +52,8 @@ const PirateDatingApp = () => {
       location: "Caribbean Waters",
       bio: "Looking for a first mate who can handle both treasure maps and deep conversations. Must love parrots!",
       interests: ["Treasure hunting", "Sword fighting", "Star navigation"],
-      image: ladyPirate
+      image: ladyPirate,
+      matchProbability: 0.9 // 90% chance to match
     },
     {
       name: "Jack 'Storm Chaser' Johnson",
@@ -82,16 +87,38 @@ const PirateDatingApp = () => {
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete);
     setLastDirection(direction);
+
+    if (direction === 'right') {
+      const profile = pirateProfiles.find(p => p.name === nameToDelete);
+      if (profile && Math.random() < profile.matchProbability) {
+        // It's a match!
+        const newMatch = {
+          id: matches.length + 1,
+          name: profile.name,
+          avatar: profile.image,
+          lastMessage: "Ahoy! We've matched! Let's set sail together!",
+          time: "Just now",
+          unread: true
+        };
+        setMatches(prevMatches => [...prevMatches, newMatch]);
+        setCurrentMatch(newMatch);
+      }
+    }
   };
 
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!');
   };
 
+  const handleMessageMatch = () => {
+    setCurrentScreen('messages');
+    setCurrentMatch(null);
+  };
+
   const renderScreen = () => {
     switch(currentScreen) {
       case 'messages':
-        return <MessagesScreen />;
+        return <MessagesScreen matches={matches} />;
       case 'profile':
         return <div>Profile Screen (Coming Soon)</div>;
       default:
@@ -173,7 +200,11 @@ const PirateDatingApp = () => {
       </div>
 
       {/* Main Content */}
-      {renderScreen()}
+      {currentScreen === 'messages' ? (
+        <MessagesScreen matches={matches} />
+      ) : (
+        renderScreen()
+      )}
 
       {/* Navigation Bar */}
       <div className={styles.navigationBar}>
@@ -201,6 +232,14 @@ const PirateDatingApp = () => {
           </button>
         </div>
       </div>
+
+      {currentMatch && (
+        <MatchModal
+          match={currentMatch}
+          onClose={() => setCurrentMatch(null)}
+          onMessage={handleMessageMatch}
+        />
+      )}
     </div>
   );
 };

@@ -67,4 +67,17 @@
 .unread {
   color: #e2e8f0;
   font-weight: 500;
+}
+
+.noMatches {
+  text-align: center;
+  padding: 2rem;
+  background-color: #1e293b;
+  border-radius: 0.75rem;
+  color: #94a3b8;
+}
+
+.noMatches p {
+  font-size: 1rem;
+  line-height: 1.5;
 } 

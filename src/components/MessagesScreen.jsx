@@ -6,7 +6,7 @@ import couplePirate from '../assets/pirate_pictures/looking43rd.webp';
 import pegleglady from '../assets/pirate_pictures/pegleg.webp';
 import ChatScreen from './ChatScreen';
 
-const MessagesScreen = () => {
+const MessagesScreen = ({ matches }) => {
   const [selectedChat, setSelectedChat] = useState(null);
 
   const messages = [
@@ -36,24 +36,30 @@ const MessagesScreen = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Messages</h1>
       <div className={styles.messagesList}>
-        {messages.map((message) => (
-          <div 
-            key={message.id} 
-            className={styles.messageItem}
-            onClick={() => setSelectedChat(message)}
-          >
-            <img src={message.avatar} alt={message.name} className={styles.avatar} />
-            <div className={styles.messageContent}>
-              <div className={styles.messageHeader}>
-                <h3 className={styles.messageName}>{message.name}</h3>
-                <span className={styles.messageTime}>{message.time}</span>
-              </div>
-              <p className={`${styles.messageText} ${message.unread ? styles.unread : ''}`}>
-                {message.lastMessage}
-              </p>
-            </div>
+        {matches.length === 0 ? (
+          <div className={styles.noMatches}>
+            <p>No matches yet! Keep swiping to find your crew! 🏴‍☠️</p>
           </div>
-        ))}
+        ) : (
+          matches.map((message) => (
+            <div 
+              key={message.id} 
+              className={styles.messageItem}
+              onClick={() => setSelectedChat(message)}
+            >
+              <img src={message.avatar} alt={message.name} className={styles.avatar} />
+              <div className={styles.messageContent}>
+                <div className={styles.messageHeader}>
+                  <h3 className={styles.messageName}>{message.name}</h3>
+                  <span className={styles.messageTime}>{message.time}</span>
+                </div>
+                <p className={`${styles.messageText} ${message.unread ? styles.unread : ''}`}>
+                  {message.lastMessage}
+                </p>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
