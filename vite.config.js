@@ -8,6 +8,7 @@ export default defineConfig({
     allowedHosts: [
       "localhost",
       ".replit.dev", // This will allow all replit.dev subdomains
+      "tindarr-dfordavey.replit.app",
     ],
   },
 });
