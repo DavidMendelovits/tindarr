@@ -1,20 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Send } from 'lucide-react';
 import styles from './ChatScreen.module.css';
+import { defaultMessages } from '../data/pirateData';
 
 const ChatScreen = ({ chat, onBack }) => {
   const [messageText, setMessageText] = useState('');
-  const [chatMessages, setChatMessages] = useState([
-    {
-      id: 1,
-      sender: 'them',
-      text: "Ahoy! We've matched! Let's set sail together!",
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-  ]);
-  
+  const [chatMessages, setChatMessages] = useState([]);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const messagesEndRef = useRef(null);
-  
+
+  // Initialize with first message
+  useEffect(() => {
+    if (chat.messages && chat.messages.length > 0) {
+      setChatMessages([{
+        id: 1,
+        sender: 'them',
+        text: chat.messages[0],
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }]);
+      setCurrentMessageIndex(1);
+    } else {
+      setChatMessages(defaultMessages);
+    }
+  }, [chat]);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -27,7 +36,6 @@ const ChatScreen = ({ chat, onBack }) => {
     e.preventDefault();
     if (!messageText.trim()) return;
 
-    // Add user message
     const newMessage = {
       id: chatMessages.length + 1,
       sender: 'me',
@@ -38,25 +46,39 @@ const ChatScreen = ({ chat, onBack }) => {
     setChatMessages(prev => [...prev, newMessage]);
     setMessageText('');
 
-    // Simulate response after a delay
-    setTimeout(() => {
-      const responses = [
-        "Yarr, that's interesting! Tell me more!",
-        "By Blackbeard's beard, you don't say!",
-        "Shiver me timbers, what a tale!",
-        "Aye, that's the spirit!",
-        "Blimey! You're quite the storyteller!"
-      ];
-      
-      const responseMessage = {
-        id: chatMessages.length + 2,
-        sender: 'them',
-        text: responses[Math.floor(Math.random() * responses.length)],
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      
-      setChatMessages(prev => [...prev, responseMessage]);
-    }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+    // If we have more predefined responses, send the next one
+    if (chat.messages && currentMessageIndex < chat.messages.length) {
+      setTimeout(() => {
+        const responseMessage = {
+          id: chatMessages.length + 2,
+          sender: 'them',
+          text: chat.messages[currentMessageIndex],
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        setChatMessages(prev => [...prev, responseMessage]);
+        setCurrentMessageIndex(prev => prev + 1);
+      }, 1000 + Math.random() * 1000);
+    } else {
+      // Use random responses if we're out of predefined messages
+      setTimeout(() => {
+        const responses = [
+          "Yarr, that's interesting! Tell me more!",
+          "By Blackbeard's beard, you don't say!",
+          "Shiver me timbers, what a tale!",
+          "Aye, that's the spirit!",
+          "Blimey! You're quite the storyteller!"
+        ];
+        
+        const responseMessage = {
+          id: chatMessages.length + 2,
+          sender: 'them',
+          text: responses[Math.floor(Math.random() * responses.length)],
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        
+        setChatMessages(prev => [...prev, responseMessage]);
+      }, 1000 + Math.random() * 1000);
+    }
   };
 
   return (

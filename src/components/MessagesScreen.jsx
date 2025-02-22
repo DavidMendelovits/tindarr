@@ -1,32 +1,9 @@
 import React, { useState } from 'react';
 import styles from './MessagesScreen.module.css';
-import ladyPirate from '../assets/pirate_pictures/ladypirate.webp';
-import fishGuy from '../assets/pirate_pictures/Collier-Tinder-Guy-Holding-a-Fish.webp';
-import couplePirate from '../assets/pirate_pictures/looking43rd.webp';
-import pegleglady from '../assets/pirate_pictures/pegleg.webp';
 import ChatScreen from './ChatScreen';
 
 const MessagesScreen = ({ matches }) => {
   const [selectedChat, setSelectedChat] = useState(null);
-
-  const messages = [
-    {
-      id: 1,
-      name: "Captain Sally 'Silver Tongue' Smith",
-      avatar: ladyPirate,
-      lastMessage: "Ahoy! Fancy a drink at the Rusty Anchor?",
-      time: "2h ago",
-      unread: true
-    },
-    {
-      id: 2,
-      name: "Mary and Jack",
-      avatar: couplePirate,
-      lastMessage: "We've got room in our crew for one more...",
-      time: "1d ago",
-      unread: false
-    }
-  ];
 
   if (selectedChat) {
     return <ChatScreen chat={selectedChat} onBack={() => setSelectedChat(null)} />;

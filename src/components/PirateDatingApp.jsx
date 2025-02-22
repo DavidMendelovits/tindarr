@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Heart, Anchor, Compass, MessageSquare, X } from 'lucide-react';
 import TinderCard from 'react-tinder-card';
 import styles from './PirateDatingApp.module.css';
-import ladyPirate from '../assets/pirate_pictures/ladypirate.webp';
-import fishGuy from '../assets/pirate_pictures/Collier-Tinder-Guy-Holding-a-Fish.webp';
-import couplePirate from '../assets/pirate_pictures/looking43rd.webp';
-import pegleglady from '../assets/pirate_pictures/pegleg.webp';
-import mermaid from '../assets/pirate_pictures/mermaid.webp';
+import { pirateProfiles } from '../data/pirateData';
 import MessagesScreen from './MessagesScreen';
 import MatchModal from './MatchModal';
 
@@ -34,71 +30,21 @@ const PirateDatingApp = () => {
     restDelta: 0.01 // Controls when the spring is considered at rest
   };
 
-  const pirateProfiles = [
-    {
-      name: "Mary and Jack'",
-      age: "44 and 45",
-      ship: "The Upside down pineapple",
-      location: "Santa Monica, CA",
-      bio: "We are a couple of pirates looking for a new crew member to join us on our adventures.",
-      interests: ["Cuckoldry", "Anal Beads","Treasure hunting", "Crossing Swords"],
-      image: couplePirate,
-      matchProbability: 0.8 // 80% chance to match
-    },
-    {
-      name: "Captain Sally 'Silver Tongue' Smith",
-      age: "32 Summers at Sea",
-      ship: "The Sassy Serpent",
-      location: "Caribbean Waters",
-      bio: "Looking for a first mate who can handle both treasure maps and deep conversations. Must love parrots!",
-      interests: ["Treasure hunting", "Sword fighting", "Star navigation"],
-      image: ladyPirate,
-      matchProbability: 0.9 // 90% chance to match
-    },
-    {
-      name: "Jack 'Storm Chaser' Johnson",
-      age: "45 Voyages Young",
-      ship: "Thunder's Wake",
-      location: "Spanish Main",
-      bio: "Seasoned captain seeking adventure partner. Gold is temporary, but love is eternal.",
-      interests: ["Storm navigation", "Sea shanties", "Pearl diving"],
-      image: fishGuy
-    },
-    {
-      name: "'Mystic' Mary Morgan",
-      age: "28 Tides Old",
-      ship: "Moonlight Marauder",
-      location: "Tortuga",
-      bio: "Part-time mystic, full-time pirate. Looking for someone to share the horizon with.",
-      interests: ["Fortune telling", "Spyglass crafting", "Treasure mapping"],
-      image: pegleglady
-    },
-    {
-      name: "Sheila the mermaid",
-      age: "28 Tides Old",
-      ship: "Moonlight Marauder",
-      location: "Tortuga",
-      bio: "Looking for someone to crash into this rock if you know what I mean 😉",
-      interests: ["Singing for literally no reason", "Swimming", "handjobs"],
-      image: mermaid
-    }
-  ];
-
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete);
     setLastDirection(direction);
 
     if (direction === 'right') {
       const profile = pirateProfiles.find(p => p.name === nameToDelete);
-      if (profile && Math.random() < profile.matchProbability) {
-        // It's a match!
+      if (profile && Math.random() < (profile.matchProbability || 0.5)) {
+        // Create match with reference to original profile
         const newMatch = {
+          ...profile, // Spread all profile data
           id: matches.length + 1,
-          name: profile.name,
-          avatar: profile.image,
-          lastMessage: "Ahoy! We've matched! Let's set sail together!",
+          lastMessage: profile.messages?.[0] || "Ahoy! We've matched! Let's set sail together!",
           time: "Just now",
-          unread: true
+          unread: true,
+          avatar: profile.image // Explicitly set avatar to match the image property
         };
         setMatches(prevMatches => [...prevMatches, newMatch]);
         setCurrentMatch(newMatch);
