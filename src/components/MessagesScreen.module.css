@@ -2,6 +2,7 @@
   padding: 1rem;
   height: calc(100vh - 5rem);
   overflow-y: auto;
+  user-select: none;
 }
 
 .title {
@@ -36,10 +37,13 @@
   height: 3rem;
   border-radius: 50%;
   object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .messageContent {
   flex: 1;
+  user-select: none;
 }
 
 .messageHeader {

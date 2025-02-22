@@ -24,7 +24,12 @@ const MessagesScreen = ({ matches }) => {
               className={styles.messageItem}
               onClick={() => setSelectedChat(message)}
             >
-              <img src={message.avatar} alt={message.name} className={styles.avatar} />
+              <img 
+                src={message.avatar} 
+                alt={message.name} 
+                className={styles.avatar} 
+                draggable="false"
+              />
               <div className={styles.messageContent}>
                 <div className={styles.messageHeader}>
                   <h3 className={styles.messageName}>{message.name}</h3>

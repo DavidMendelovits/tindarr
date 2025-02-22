@@ -5,6 +5,7 @@
   background-color: #0f172a;
   position: relative;
   z-index: 50;
+  user-select: none;
 }
 
 .header {
@@ -32,6 +33,8 @@
   height: 2.5rem;
   border-radius: 50%;
   object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .headerInfo {
@@ -75,6 +78,7 @@
   border-radius: 1rem;
   position: relative;
   word-break: break-word;
+  user-select: none;
 }
 
 .sent {

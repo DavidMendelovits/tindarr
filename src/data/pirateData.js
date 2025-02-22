@@ -35,7 +35,7 @@ export const pirateProfiles = [
     image: ladyPirate,
     matchProbability: 0.9,
     messages: [
-      "Ahoy! Fancy a drink at the Rusty Anchor?",
+      "Ahoy! Board my ship will ye?",
       "I need to tell you a secret. I've got scurvy",
       "And herpes.",
       "Most of my crew does too, we're very close 😉",

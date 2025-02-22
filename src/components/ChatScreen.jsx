@@ -88,7 +88,12 @@ const ChatScreen = ({ chat, onBack }) => {
         <button onClick={onBack} className={styles.backButton}>
           <ArrowLeft size={24} />
         </button>
-        <img src={chat.avatar} alt={chat.name} className={styles.avatar} />
+        <img 
+          src={chat.avatar} 
+          alt={chat.name} 
+          className={styles.avatar} 
+          draggable="false"
+        />
         <div className={styles.headerInfo}>
           <h2 className={styles.name}>{chat.name}</h2>
         </div>

@@ -88,6 +88,7 @@ const PirateDatingApp = () => {
                       src={profile.image} 
                       alt={profile.name}
                       className={styles.profilePicture}
+                      draggable="false"
                     />
                   </div>
 

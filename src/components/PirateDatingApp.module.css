@@ -4,6 +4,7 @@
   color: white;
   padding: 1rem;
   overflow: hidden;
+  user-select: none;
 }
 
 .header {
@@ -76,12 +77,15 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .profileInfo {
   padding: 1rem;
   max-height: calc(100% - 24rem);
   overflow-y: auto;
+  user-select: none;
 }
 
 .profileName {
