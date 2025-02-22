@@ -4,6 +4,8 @@ import couplePirate from '../assets/pirate_pictures/looking43rd.webp';
 import pegleglady from '../assets/pirate_pictures/pegleg.png';
 import mermaid from '../assets/pirate_pictures/hotmermaid.png';
 import piratewithfish from '../assets/pirate_pictures/piratewithfish.png';
+import nami from '../assets/pirate_pictures/nami.avif';
+import luffy from '../assets/pirate_pictures/luffy.webp';
 
 
 export const pirateProfiles = [
@@ -100,6 +102,33 @@ export const pirateProfiles = [
       "Most of my crew does too, we're very close 😉",
       "Want to compare symptoms?",
       "I know a witch doctor who can help us both..."
+    ]
+  },
+  {
+    id: 6,
+    name: "Nami",
+    age: "29",
+    ship: "The Sassy Serpent",
+    location: "Tortuga",
+    bio: "STOP WITH THE HENTAI",
+    interests: ["Pegging", "Sword fighting", "Astrology"],
+    image: nami,
+    matchProbability: 0.9,
+    messages: [
+      "Ahoy! Board my ship will ye?",
+    ]
+  },
+  {
+    id: 7,
+    name: "Luffy",
+    age: "29",
+    ship: "The Strawhat Pirates",
+    location: "Grand Line",
+    bio: "I’m gonna be king of the pirate and find the One Piece (of that ass)",
+    interests: ["meat"],
+    image: luffy,
+    matchProbability: 0.9,
+    messages: [
     ]
   }
 ];
