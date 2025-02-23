@@ -10,6 +10,7 @@ export default defineConfig({
       "localhost",
       ".replit.dev", // This will allow all replit.dev subdomains
       "tindarr-dfordavey.replit.app",
+      "grindarr-dfordavey.replit.app",
     ],
   },
 });
