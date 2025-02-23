@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Heart, Anchor, Compass, MessageSquare, X } from 'lucide-react';
 import TinderCard from 'react-tinder-card';
 import styles from './PirateDatingApp.module.css';
-import { pirateProfiles } from '../data/pirateData';
+import { pirateProfiles, grindrProfiles } from '../data/pirateData';
 import MessagesScreen from './MessagesScreen';
 import MatchModal from './MatchModal';
 
-const PirateDatingApp = () => {
+const PirateDatingApp = ({ type }) => {
   const [currentScreen, setCurrentScreen] = useState('discover');
   const [lastDirection, setLastDirection] = useState();
   const [matches, setMatches] = useState([]);
   const [currentMatch, setCurrentMatch] = useState(null);
+  const [shuffledProfiles, setShuffledProfiles] = useState([]);
+
+  // Fisher-Yates shuffle algorithm
+  const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  // Initialize shuffled profiles on mount
+  useEffect(() => {
+    const profiles = type === 'tinder' ? pirateProfiles : grindrProfiles;
+    setShuffledProfiles(shuffleArray(profiles));
+  }, [type]);
 
   // Add swipe configuration
   const swipeConfig = {
@@ -35,16 +52,17 @@ const PirateDatingApp = () => {
     setLastDirection(direction);
 
     if (direction === 'right') {
-      const profile = pirateProfiles.find(p => p.name === nameToDelete);
+      const profiles = type === 'tinder' ? pirateProfiles : grindrProfiles;
+      const profile = profiles.find(p => p.name === nameToDelete);
       if (profile && Math.random() < (profile.matchProbability || 0.5)) {
         // Create match with reference to original profile
         const newMatch = {
-          ...profile, // Spread all profile data
+          ...profile,
           id: matches.length + 1,
           lastMessage: profile.messages?.[0] || "Ahoy! We've matched! Let's set sail together!",
           time: "Just now",
           unread: true,
-          avatar: profile.image // Explicitly set avatar to match the image property
+          avatar: profile.image
         };
         setMatches(prevMatches => [...prevMatches, newMatch]);
         setCurrentMatch(newMatch);
@@ -70,7 +88,7 @@ const PirateDatingApp = () => {
       default:
         return (
           <div className={styles.cardsContainer}>
-            {pirateProfiles.map((profile) => (
+            {shuffledProfiles.map((profile) => (
               <TinderCard
                 className={styles.swipe}
                 key={profile.name}
@@ -139,11 +157,13 @@ const PirateDatingApp = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${type === 'grindr' ? styles.grindr : ''}`}>
       {/* Header */}
       <div className={styles.header}>
         <Anchor className={styles.headerIcon} size={32} />
-        <h1 className={styles.title}>Tind-arrrrgh</h1>
+        <h1 className={styles.title}>
+          {type === 'tinder' ? 'Tind-arrrrgh' : 'Grind-aaarrrrgh'}
+        </h1>
       </div>
 
       {/* Main Content */}

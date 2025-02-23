@@ -2,7 +2,7 @@ import PirateDatingApp from './components/PirateDatingApp'
 
 function App() {
   return (
-    <PirateDatingApp />
+    <PirateDatingApp type="grindr" />
   )
 }
 
