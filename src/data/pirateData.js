@@ -240,7 +240,7 @@ export const grindrProfiles = [
         age: "29",
         ship: "The Sassy Serpent",
         location: "Tortuga",
-        bio: "I'm a male pirate who loves to study",
+        bio: "💦💦💦",
         interests: ["Studying", "Astrology"],
         image: malepiratestud,
         matchProbability: 0.9,
